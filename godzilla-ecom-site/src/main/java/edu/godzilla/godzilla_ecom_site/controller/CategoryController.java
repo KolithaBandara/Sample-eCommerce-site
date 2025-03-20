@@ -11,24 +11,26 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/public")
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/api/public/categories")
+//    @GetMapping("/api/public/categories")
+    @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public ResponseEntity<List<Category>> getAllCategories(){
         List<Category> categories = categoryService.getAllCategories();
         return new ResponseEntity<>(categories,HttpStatus.OK);
     }
 
-    @PostMapping("/api/public/categories")
+    @PostMapping("/categories")
     public ResponseEntity<String> createCategory(@RequestBody Category category){
         String status = categoryService.createCategory(category);
         return new ResponseEntity<>(status,HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/api/public/categories/{categoryId}/delete")
+    @DeleteMapping("/categories/{categoryId}/delete")
     public ResponseEntity<String> deleteCategory(@PathVariable long categoryId){
         try {
             String status = categoryService.deleteCategory(categoryId);
@@ -39,7 +41,7 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("/api/public/categories/{categoryId}")
+    @PutMapping("/categories/{categoryId}")
     public ResponseEntity<String> updateCategory(
             @RequestBody Category updateCategory,
             @PathVariable long categoryId){
