@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements  CategoryService{
     public String createCategory(Category category) {
         category.setCategoryId(++categoryId);
         categories.add(category);
-        return "Category named "+category.getCategoryName()+" created successfully!";
+        return "Category name: "+category.getCategoryName()+" : created successfully!";
     }
 
     @Override
