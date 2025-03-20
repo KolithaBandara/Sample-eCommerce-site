@@ -38,4 +38,18 @@ public class CategoryController {
         }
     }
 
+    @PutMapping("/api/public/categories/{categoryId}")
+    public ResponseEntity<String> updateCategory(
+            @RequestBody Category updateCategory,
+            @PathVariable long categoryId){
+        try {
+            categoryService.updateCategory(updateCategory, categoryId);
+            return new ResponseEntity<>("Updated Successfully !",HttpStatus.OK);
+        }catch (ResponseStatusException responseStatusException){
+            return new ResponseEntity<>(
+                    "Can not found the category !",
+                    HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
