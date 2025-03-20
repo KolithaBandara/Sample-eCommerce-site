@@ -12,6 +12,7 @@ import java.util.List;
 public class CategoryServiceImpl implements  CategoryService{
 
     private List<Category> categories = new ArrayList<>();
+    private long categoryId = 0l;
 
     @Override
     public List<Category> getAllCategories() {
@@ -20,7 +21,8 @@ public class CategoryServiceImpl implements  CategoryService{
 
     @Override
     public String createCategory(Category category) {
+        category.setCategoryId(++categoryId);
         categories.add(category);
-        return "Category created successfully!";
+        return "Category named "+category.getCategoryName()+" created successfully!";
     }
 }

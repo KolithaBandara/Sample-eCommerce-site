@@ -22,7 +22,7 @@ public class CategoryController {
     @PostMapping("/api/public/categories")
     public String createCategory(@RequestBody Category category){
         categoryService.createCategory(category);
-        return "Category added successfully";
+        return "Category named "+category.getCategoryName()+" created successfully!";
     }
 
 }
