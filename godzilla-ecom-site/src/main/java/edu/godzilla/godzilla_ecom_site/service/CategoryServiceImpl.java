@@ -1,8 +1,6 @@
 package edu.godzilla.godzilla_ecom_site.service;
 
-import edu.godzilla.godzilla_ecom_site.controller.CategoryController;
 import edu.godzilla.godzilla_ecom_site.model.Category;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,5 +22,16 @@ public class CategoryServiceImpl implements  CategoryService{
         category.setCategoryId(++categoryId);
         categories.add(category);
         return "Category named "+category.getCategoryName()+" created successfully!";
+    }
+
+    @Override
+    public String deleteCategory(long categoryId) {
+        Category status = categories.stream()
+                .filter(category -> category.getCategoryId() == categoryId)
+                .findFirst().orElse(null);
+        if (status == null) return "Category not found :/";
+
+        categories.remove(status);
+        return "Deleted successfully !";
     }
 }
